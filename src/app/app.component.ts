@@ -6,4 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  constructor() {
+    const notes = [
+      {
+        title: 'Title',
+        description: 'Description'
+      }
+    ];
+
+    sessionStorage.setItem('notes', JSON.stringify(notes))
+
+    sessionStorage.getItem('notes')
+  }
 }
