@@ -21,12 +21,8 @@
       "dom"
     ],
     "paths": {
-      "@env": ["environments/environment"],
-      "@shared/*": ["app/shared/*"],
-      "@core/*": ["app/core/*"]
-    },
-    "stylePreprocessorOptions": {
-      "includePaths": ["src/assets/styles"]
+      "@shared/*": ["./src/app/shared/*"],
+      "@core/*": ["./src/app/core/*"]
     },
   },
   "angularCompilerOptions": {
