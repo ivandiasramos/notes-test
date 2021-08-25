@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { StoreService } from './core/services/store/store.service';
 
 @Component({
   selector: 'app-root',
@@ -6,7 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor() {
+  constructor(private storeService: StoreService) {
     const notes = [
       {
         title: 'Title',
@@ -14,8 +15,8 @@ export class AppComponent {
       }
     ];
 
-    sessionStorage.setItem('notes', JSON.stringify(notes))
+    this.storeService.setNotes(notes);
 
-    sessionStorage.getItem('notes')
+    this.storeService.getNotes();
   }
 }
