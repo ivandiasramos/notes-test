@@ -1,0 +1,21 @@
+$aside-width: 250px;
+
+:host {
+    min-height: 100vh;
+    display: flex;
+    align-items: stretch;
+}
+
+.aside,
+.main {
+    display: inline-block;
+}
+
+.main {
+    padding-left: 30px;
+    width: calc(100% - #{$aside-width});
+}
+
+.aside {
+    min-width: $aside-width;
+}

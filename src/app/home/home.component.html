@@ -1,0 +1,9 @@
+<div class="aside">
+    <app-aside
+        (createdNote)="createNote()"></app-aside>
+</div>
+<div class="main" *ngIf="currentNote">
+    <app-main
+        [note]="currentNote">
+    </app-main>
+</div>

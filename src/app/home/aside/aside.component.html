@@ -1,0 +1,8 @@
+<button (click)="createNote()">Criar nota</button>
+
+<ul *ngFor="let note of store.notes">
+    <li>
+        <div>{{ note.title }}</div>
+        <div>{{ note.description }}</div>
+    </li>
+</ul>

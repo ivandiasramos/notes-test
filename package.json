@@ -6,9 +6,10 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "jest",
-    "test-coverage-watch": "jest --coverage --watch",
-    "test:coverage": "jest --coverage",
-    "test:watch": "jest --watch",
+    "test-coverage-watch": "jest --coverage --watch --detectOpenHandles",
+    "test:coverage": "jest --coverage --detectOpenHandles",
+    "test:watch": "jest --watch --detectOpenHandles",
+    "test:clear": "jest --clearCache",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
@@ -23,6 +24,7 @@
     "@angular/platform-browser-dynamic": "~11.1.2",
     "@angular/router": "~11.1.2",
     "bootstrap": "^5.1.0",
+    "ng-mocks": "^12.4.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"

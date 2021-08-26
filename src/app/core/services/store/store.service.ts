@@ -1,25 +1,66 @@
 import { Injectable } from '@angular/core';
 
-export interface INotes {
+export interface INote {
   title: string,
   description: string,
+  id?: number,
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class StoreService {
-  getNotes(): INotes[] {
-    const sessionNotes = sessionStorage.getItem('notes');
+  public notes: INote[] = [];
 
-    if (sessionNotes) {
-      return JSON.parse(sessionNotes) as INotes[];
+  constructor() {
+    this.getSessionNotes().forEach(note => this.notes.push(note))
+  }
+
+  get sessionNotes() {
+    return sessionStorage.getItem('notes');
+  }
+
+  getSessionNotes(): INote[] {
+    if (this.sessionNotes) {
+      return JSON.parse(this.sessionNotes) as INote[];
     }
 
     return [];
   }
 
-  setNotes(notes: INotes[]): void {
-    sessionStorage.setItem('notes', JSON.stringify(notes));
+  getLastNote(): INote {
+    return this.getSessionNotes()[this.getSessionNotes().length - 1];
+  }
+
+  setNote(note: INote): void {
+    this.notes.push(this.createNote(note));
+
+    debugger;
+
+    sessionStorage.setItem(
+      'notes',
+      JSON.stringify(this.notes)
+    );
+  }
+
+  updateNote(noteParam: INote): void {
+    this.notes = this.notes.map(note => 
+      note.id === noteParam.id
+        ? this.createNewNote(noteParam)
+        : note
+    );
+
+    sessionStorage.setItem(
+      'notes',
+      JSON.stringify(this.notes)
+    );
+  }
+
+  private createNewNote(noteParam: INote): INote {
+    return { title: noteParam.title, description: noteParam.description, id: noteParam.id };
+  }
+
+  private createNote(note: INote): INote {
+    return { ...note, id: this.getSessionNotes().length };
   }
 }

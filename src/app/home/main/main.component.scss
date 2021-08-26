@@ -1,0 +1,36 @@
+@import './../../../assets/styles/component.scss';
+
+:host {
+    display: block;
+    background-color: $secondary-color;
+    min-height: 100%;
+}
+
+.default-input,
+.default-textarea {
+    width: 100%;
+    display: block;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    padding: 20px;
+}
+
+.default-input {
+    color: $tertiary-color;
+    caret-color: $tertiary-color;
+}
+
+.default-textarea {
+    height: 500px;
+    color: $tertiary-color;
+    caret-color: $tertiary-color;
+}
+
+.title-input {
+    font-size: 3.4rem;
+}
+
+.description-textarea {
+    font-size: 1.7rem;
+}

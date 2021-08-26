@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { INotes, StoreService } from './store.service';
+import { INote, StoreService } from './store.service';
 
 describe('StoreService', () => {
   let service: StoreService;
@@ -14,18 +14,16 @@ describe('StoreService', () => {
     expect(service).toBeTruthy();
   });
 
-  describe('getNotes', () => {
+  describe('getSessionNotes', () => {
     it('should return empty array', () => {
-      expect(service.getNotes()).toHaveLength(0);
+      expect(service.getSessionNotes()).toHaveLength(0);
     });
 
     it('should return array with 1 item', () => {
-      const notes: INotes[] = [
-        { title: 'Title', description: 'Description' }
-      ]
-      service.setNotes(notes);
+      const note: INote = { title: 'Title', description: 'Description' };
+      service.setNote(note);
 
-      expect(service.getNotes()).toHaveLength(1);
+      expect(service.getSessionNotes()).toHaveLength(1);
     });
   })
 });

@@ -7,16 +7,5 @@ import { StoreService } from './core/services/store/store.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(private storeService: StoreService) {
-    const notes = [
-      {
-        title: 'Title',
-        description: 'Description'
-      }
-    ];
-
-    this.storeService.setNotes(notes);
-
-    this.storeService.getNotes();
-  }
+  
 }
