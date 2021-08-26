@@ -16,7 +16,7 @@ export class StoreService {
     this.getSessionNotes().forEach(note => this.notes.push(note))
   }
 
-  get sessionNotes() {
+  private get sessionNotes() {
     return sessionStorage.getItem('notes');
   }
 
@@ -30,6 +30,15 @@ export class StoreService {
 
   getLastNote(): INote {
     return this.getSessionNotes()[this.getSessionNotes().length - 1];
+  }
+
+  getNote(id: number | undefined): INote | undefined {
+    return this.getSessionNotes().find(note => note.id === id);
+  }
+
+  clearNotes(): void {
+    this.notes = [];
+    sessionStorage.clear();
   }
 
   setNote(note: INote): void {
@@ -68,6 +77,6 @@ export class StoreService {
   }
 
   private createNote(note: INote): INote {
-    return { ...note, id: this.getSessionNotes().length };
+    return { ...note, id: this.getSessionNotes().length + 1 };
   }
 }

@@ -8,6 +8,7 @@ describe('StoreService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({});
     service = TestBed.inject(StoreService);
+    service.clearNotes();
   });
 
   it('should be created', () => {
@@ -24,6 +25,48 @@ describe('StoreService', () => {
       service.setNote(note);
 
       expect(service.getSessionNotes()).toHaveLength(1);
+    });
+  })
+
+  describe('getLastNote', () => {
+    it('should return last note', () => {
+      service.setNote({ title: 'title1', description: 'description1' });
+      service.setNote({ title: 'title2', description: 'description2' });
+
+      expect(service.getLastNote().id).toBe(2);
+    });
+  })
+
+  describe('removeNote', () => {
+    it('should remove a note', () => {
+      const note: INote = { title: 'title1', description: 'description1', id: 1 };
+
+      service.setNote(note);
+      service.removeNote(note);
+
+      expect(service.getNote(note.id)).toBeUndefined();
+    });
+  })
+
+  describe('updateNote', () => {
+    it('should update a note', () => {
+      const note: INote = { title: 'title1', description: 'description1' };
+      const newNote: INote = { title: 'title2', description: 'description2', id: 1 };
+
+      service.setNote(note);
+      service.updateNote(newNote);
+
+      expect(service.getNote(1)?.title).toBe('title2');
+    });
+
+    it('should not update a note', () => {
+      const note: INote = { title: 'title1', description: 'description1' };
+      const newNote: INote = { title: 'title2', description: 'description2', id: 2 };
+
+      service.setNote(note);
+      service.updateNote(newNote);
+
+      expect(service.getNote(1)?.title).toBe('title1');
     });
   })
 });
