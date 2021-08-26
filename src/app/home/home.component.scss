@@ -1,4 +1,4 @@
-$aside-width: 250px;
+$aside-width: 350px;
 
 :host {
     min-height: 100vh;
@@ -12,10 +12,9 @@ $aside-width: 250px;
 }
 
 .main {
-    padding-left: 30px;
     width: calc(100% - #{$aside-width});
 }
 
 .aside {
-    min-width: $aside-width;
+    width: $aside-width;
 }

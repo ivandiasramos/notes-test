@@ -1,6 +1,9 @@
 <div class="aside">
     <app-aside
-        (createdNote)="createNote()"></app-aside>
+        (openedNote)="openNote($event)"
+        (createdNote)="createNote()"
+        (removedNote)="removeNote($event)">
+    </app-aside>
 </div>
 <div class="main" *ngIf="currentNote">
     <app-main

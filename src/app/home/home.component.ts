@@ -15,16 +15,27 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  createNote() {
-    this.currentNote = null;
-    const note =
-      {
-        title: 'Untitled',
-        description: ''
-      };
+  createNote(): void {
+    this.storeService.setNote(this.defaultNote);
 
-    this.storeService.setNote(note);
-    setTimeout(() => this.currentNote = this.storeService.getLastNote());
+    this.openNote(this.storeService.getLastNote());
+  }
+
+  openNote(note: INote): void {
+    this.currentNote = null;
+    setTimeout(() => this.currentNote = note);
+  }
+
+  removeNote(note: INote): void {
+    this.storeService.removeNote(note);
+    this.currentNote = null;
+  }
+
+  private get defaultNote(): INote {
+    return {
+      title: 'Untitled',
+      description: ''
+    };
   }
 
 }

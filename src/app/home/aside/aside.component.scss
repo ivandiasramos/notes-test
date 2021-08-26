@@ -1,4 +1,68 @@
+@import './../../../assets/styles/component.scss';
+
 :host {
     display: block;
     min-height: 100%;
+    padding: 0 1.5rem;
+}
+
+.create-note-button {
+    background-color: $quaternary-color;
+    color: $senary-color;
+    height: 4.5rem;
+    border-radius: .4rem;
+    transition: $default-transition;
+    position: relative;
+    padding-left: 4rem;
+    font-size: 1.5rem;
+
+    &:hover,
+    &:active {
+        background-color: lighten($quaternary-color, 5%);
+    }
+
+    .fas {
+        position: absolute;
+        left: 1.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}
+
+.create-note-button,
+.note-button {
+    width: 100%;
+    width: 100%;
+    text-align: left;
+}
+
+.note-button {
+    margin-bottom: .5rem;
+    padding: 2rem 5.5rem 2rem 1.5rem;
+    background-color: transparent;
+    border: 2px solid $quinary-color;
+    color: $tertiary-color;
+
+    > .title {
+        font-size: 1.6rem;
+    }
+}
+
+.list {
+    .item {
+        position: relative;
+    }
+}
+
+.header {
+    margin: 3rem 0;
+}
+
+.trash-button {
+    font-size: 1.7rem;
+    color: $tertiary-color;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 15px;
 }

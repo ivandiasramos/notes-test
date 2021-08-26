@@ -35,7 +35,14 @@ export class StoreService {
   setNote(note: INote): void {
     this.notes.push(this.createNote(note));
 
-    debugger;
+    sessionStorage.setItem(
+      'notes',
+      JSON.stringify(this.notes)
+    );
+  }
+
+  removeNote(noteParam: INote): void {
+    this.notes = this.notes.filter(note => note.id !== noteParam.id)
 
     sessionStorage.setItem(
       'notes',
