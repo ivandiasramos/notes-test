@@ -1,10 +1,15 @@
+body, html {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
 html {
   line-height: 1.15;
   font-size: $base-font-size;
 }
 
 body {
-  margin: 0;
   font-size: 1.6rem;
   color: $tertiary-color;
   background-color: $primary-color;

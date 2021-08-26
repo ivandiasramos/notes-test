@@ -1,3 +1,5 @@
+@import './../../assets/styles/component.scss';
+
 $aside-width: 350px;
 
 :host {
@@ -13,8 +15,26 @@ $aside-width: 350px;
 
 .main {
     width: calc(100% - #{$aside-width});
+    border-left: 1px solid black;
 }
 
 .aside {
     width: $aside-width;
+}
+
+.no-note {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+
+    .page-title {
+        font-size: 3rem;
+        font-weight: $font-regular;
+    }
+
+    .icon {
+        font-size: 12rem;
+    }
 }

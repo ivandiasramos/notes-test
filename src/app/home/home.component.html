@@ -5,8 +5,22 @@
         (removedNote)="removeNote($event)">
     </app-aside>
 </div>
-<div class="main" *ngIf="currentNote">
-    <app-main
-        [note]="currentNote">
-    </app-main>
+
+
+<div class="main">
+    <ng-container *ngIf="currentNote; else noNote">
+        <app-main
+            [note]="currentNote">
+        </app-main>
+    </ng-container>
+    
+    <ng-template #noNote>
+        <div class="no-note">
+            <div class="text-center">
+                <em class="far fa-edit icon"></em>
+                <h1 class="page-title">Create or selected a created note to start</h1>
+            </div>
+        </div>
+    </ng-template>
 </div>
+
