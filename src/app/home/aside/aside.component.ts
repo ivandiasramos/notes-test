@@ -1,4 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { Subject } from 'rxjs';
 import { INote, StoreService } from './../../core/services/store/store.service';
 
 @Component({
@@ -6,7 +8,7 @@ import { INote, StoreService } from './../../core/services/store/store.service';
   templateUrl: './aside.component.html',
   styleUrls: ['./aside.component.scss']
 })
-export class AsideComponent {
+export class AsideComponent implements OnDestroy {
   @Output()
   createdNote = new EventEmitter();
 
@@ -16,7 +18,16 @@ export class AsideComponent {
   @Output()
   removedNote = new EventEmitter<INote>();
 
+  searchControl = new FormControl();
+
+  private destroy = new Subject();
+
   constructor(public store: StoreService) {}
+
+  ngOnDestroy() {
+    this.destroy.next();
+    this.destroy.complete();
+  }
 
   createNote(): void {
     this.createdNote.emit();

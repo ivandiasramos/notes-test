@@ -3,18 +3,23 @@
 :host {
     display: block;
     min-height: 100%;
-    padding: 0 1.5rem;
+    padding: 0 3rem;
+}
+
+.create-note-button,
+.search-input {
+    height: $default-field-height;
+    border-radius: $default-radius;
 }
 
 .create-note-button {
     background-color: $quaternary-color;
     color: $senary-color;
-    height: 4.5rem;
-    border-radius: .4rem;
     transition: $default-transition;
     position: relative;
     padding-left: 4rem;
     font-size: 1.5rem;
+    margin-bottom: 1.5rem;
 
     &:hover,
     &:active {
@@ -26,6 +31,21 @@
         left: 1.5rem;
         top: 50%;
         transform: translateY(-50%);
+    }
+}
+
+.search-input {
+    background: transparent;
+    width: 100%;
+    border: 1px solid $quinary-color;
+    padding: 1.6rem;
+    color: $tertiary-color;
+
+    ~.fas {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 15px;
     }
 }
 

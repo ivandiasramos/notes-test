@@ -5,6 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AsideComponent } from './aside/aside.component';
 import { MainComponent } from './main/main.component';
 import { HomeRoutingModule } from './home-routing.module';
+import { CoreModule } from '../core/core.module';
+import { FilterNoteModule } from '../shared/filters/filter-note/filter-note.module';
 
 @NgModule({
   declarations: [
@@ -15,8 +17,10 @@ import { HomeRoutingModule } from './home-routing.module';
   imports: [
     ReactiveFormsModule,
     HomeRoutingModule,
+    FilterNoteModule,
     CommonModule,
     FormsModule,
+    CoreModule,
   ]
 })
 export class HomeModule { }

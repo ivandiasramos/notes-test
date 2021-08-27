@@ -1,6 +1,6 @@
 @import './../../assets/styles/component.scss';
 
-$aside-width: 350px;
+$aside-width: 400px;
 
 :host {
     min-height: 100vh;
@@ -31,10 +31,12 @@ $aside-width: 350px;
 
     .page-title {
         font-size: 3rem;
+        color: $quaternary-color;
         font-weight: $font-regular;
     }
 
     .icon {
+        color: $quaternary-color;
         font-size: 12rem;
     }
 }

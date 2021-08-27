@@ -7,10 +7,19 @@
 
         <em class="fas fa-plus"></em>
     </button>
+
+    <div class="position-relative">
+        <input
+            placeholder="Search"
+            type="text"
+            class="search-input"
+            [formControl]="searchControl">
+        <em class="fas fa-search"></em>
+    </div>
 </header>
 
 <ul class="unstyled-list list">
-    <li *ngFor="let note of store.notes" class="item">
+    <li *ngFor="let note of store.notes | filterNote : searchControl.value" class="item">
         <button
             (click)="openNote(note)"
             type="button"

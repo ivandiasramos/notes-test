@@ -24,7 +24,6 @@
     "@angular/platform-browser-dynamic": "~11.1.2",
     "@angular/router": "~11.1.2",
     "@fortawesome/fontawesome-free": "^5.15.4",
-    "bootstrap": "^5.1.0",
     "ng-mocks": "^12.4.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
