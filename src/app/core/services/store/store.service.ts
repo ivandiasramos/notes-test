@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { EncryptionService } from '../encryption/encryption.service';
 
 export interface INote {
   title: string,
@@ -14,10 +13,8 @@ export interface INote {
 })
 export class StoreService {
   public notes: INote[] = [];
-  private encryptString: string;
 
   constructor(
-    private encryptionService: EncryptionService
   ) {
     this.getSessionNotes().forEach(note => this.notes.push(note))
   }
@@ -28,7 +25,7 @@ export class StoreService {
 
   getSessionNotes(): INote[] {
     if (this.sessionNotes) {
-      return JSON.parse(this.encryptionService.decrypt(this.encryptString, 'notes')) as INote[];
+      return JSON.parse(this.sessionNotes) as INote[];
     }
 
     return [];
@@ -71,11 +68,10 @@ export class StoreService {
 
   private setNotesSession(notes: INote[]): void {
     const key = 'notes';
-    this.encryptString = this.encryptionService.encrypt(JSON.stringify(notes), key);
 
     sessionStorage.setItem(
       key,
-      this.encryptString
+      JSON.stringify(notes)
     );
   }
 
