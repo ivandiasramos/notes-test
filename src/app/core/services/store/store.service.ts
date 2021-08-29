@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 export interface INote {
   title: string,
   description: string,
+  date: Date,
   id?: number,
+  lastUpdate: string
 }
 
 @Injectable({
@@ -42,7 +44,7 @@ export class StoreService {
   }
 
   setNote(note: INote): void {
-    this.notes.push(this.createNote(note));
+    this.notes.push(this.createNewNote(note));
 
     sessionStorage.setItem(
       'notes',
@@ -62,7 +64,7 @@ export class StoreService {
   updateNote(noteParam: INote): void {
     this.notes = this.notes.map(note => 
       note.id === noteParam.id
-        ? this.createNewNote(noteParam)
+        ? this.createNote(noteParam)
         : note
     );
 
@@ -72,11 +74,11 @@ export class StoreService {
     );
   }
 
-  private createNewNote(noteParam: INote): INote {
-    return { title: noteParam.title, description: noteParam.description, id: noteParam.id };
+  private createNote(noteParam: INote): INote {
+    return { title: noteParam.title, description: noteParam.description, id: noteParam.id, date: noteParam.date, lastUpdate: noteParam.lastUpdate || 'few seconds ago' };
   }
 
-  private createNote(note: INote): INote {
-    return { ...note, id: this.getSessionNotes().length + 1 };
+  private createNewNote(note: INote): INote {
+    return { ...note, id: Date.now() };
   }
 }

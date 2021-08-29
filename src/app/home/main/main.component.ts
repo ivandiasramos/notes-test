@@ -24,23 +24,39 @@ export class MainComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.form = this.fb.group({
-      title: this.getTitle(),
-      description: this.note?.description,
-      id: this.note?.id,
-    });
-
-    this.form.valueChanges
-      .pipe(
-        debounceTime(50),
-        takeUntil(this.destroy)
-      )
-      .subscribe((form: INote) => this.store.updateNote(form))
+    this.form = this.getFormGroup();
+    this.formChanges();
   }
 
   ngOnDestroy() {
     this.destroy.next();
     this.destroy.complete();
+  }
+
+  private getFormGroup(): FormGroup {
+    return this.fb.group({
+      title: this.getTitle(),
+      description: this.note?.description,
+      id: this.note?.id,
+      date: this.note?.date,
+    });
+  }
+
+  private formChanges(): void {
+    this.form.valueChanges
+      .pipe(
+        debounceTime(300),
+        takeUntil(this.destroy)
+      )
+      .subscribe((form: INote) => {
+        this.updateDateField();
+        this.store.updateNote(form);
+      });
+  }
+
+  private updateDateField(): void {
+    const currentDate = new Date();
+    this.form.get('date')?.setValue(currentDate, { emitEvent: false });
   }
 
   private getTitle(): null | string {

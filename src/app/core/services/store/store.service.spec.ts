@@ -21,7 +21,7 @@ describe('StoreService', () => {
     });
 
     it('should return array with 1 item', () => {
-      const note: INote = { title: 'Title', description: 'Description' };
+      const note: INote = { title: 'Title', description: 'Description', date: new Date(), lastUpdate: '' };
       service.setNote(note);
 
       expect(service.getSessionNotes()).toHaveLength(1);
@@ -30,8 +30,8 @@ describe('StoreService', () => {
 
   describe('getLastNote', () => {
     it('should return last note', () => {
-      service.setNote({ title: 'title1', description: 'description1' });
-      service.setNote({ title: 'title2', description: 'description2' });
+      service.setNote({ title: 'title1', description: 'description1', date: new Date(), lastUpdate: '' });
+      service.setNote({ title: 'title2', description: 'description2', date: new Date(), lastUpdate: '' });
 
       expect(service.getLastNote().id).toBe(2);
     });
@@ -39,7 +39,7 @@ describe('StoreService', () => {
 
   describe('removeNote', () => {
     it('should remove a note', () => {
-      const note: INote = { title: 'title1', description: 'description1', id: 1 };
+      const note: INote = { title: 'title1', description: 'description1', id: 1, date: new Date(), lastUpdate: '' };
 
       service.setNote(note);
       service.removeNote(note);
@@ -50,8 +50,8 @@ describe('StoreService', () => {
 
   describe('updateNote', () => {
     it('should update a note', () => {
-      const note: INote = { title: 'title1', description: 'description1' };
-      const newNote: INote = { title: 'title2', description: 'description2', id: 1 };
+      const note: INote = { title: 'title1', description: 'description1', date: new Date(), lastUpdate: '' };
+      const newNote: INote = { title: 'title2', description: 'description2', id: 1, date: new Date(), lastUpdate: '' };
 
       service.setNote(note);
       service.updateNote(newNote);
@@ -60,8 +60,8 @@ describe('StoreService', () => {
     });
 
     it('should not update a note', () => {
-      const note: INote = { title: 'title1', description: 'description1' };
-      const newNote: INote = { title: 'title2', description: 'description2', id: 2 };
+      const note: INote = { title: 'title1', description: 'description1', date: new Date(), lastUpdate: '' };
+      const newNote: INote = { title: 'title2', description: 'description2', id: 2, date: new Date(), lastUpdate: '' };
 
       service.setNote(note);
       service.updateNote(newNote);

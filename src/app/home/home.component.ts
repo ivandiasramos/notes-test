@@ -26,10 +26,6 @@ export class HomeComponent implements OnInit {
     setTimeout(() => this.currentNote = note);
   }
 
-  search(value: string | null): void {
-    console.log(value)
-  }
-
   removeNote(note: INote): void {
     this.storeService.removeNote(note);
     this.currentNote = null;
@@ -38,7 +34,9 @@ export class HomeComponent implements OnInit {
   private get defaultNote(): INote {
     return {
       title: 'Untitled',
-      description: ''
+      description: '',
+      date: new Date(),
+      lastUpdate: 'few seconds ago'
     };
   }
 

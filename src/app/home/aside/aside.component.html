@@ -25,6 +25,8 @@
             type="button"
             class="note-button">
             <div class="title">{{ note.title }}</div>
+
+            <div class="last-update">{{ note.lastUpdate }}</div>
         </button>
         <button
             (click)="removeNote(note)"
