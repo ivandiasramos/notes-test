@@ -131,5 +131,17 @@ describe('AsideComponent', () => {
       expect(spy).toHaveBeenCalled();
     });
   });
+
+  describe('exportNotes', () => {
+    it('should call exportNotes', () => {
+      const note: INote = { title: 'title1', description: 'description1', id: 1, date: new Date('2021-08-29T18:47:57.883Z'), lastUpdate: '' };
+      const spy = jest.spyOn(component.exportImportService, 'exportNotes');
+      component.store.notes = [note];
+
+      component.exportNotes();
+
+      expect(spy).toHaveBeenCalled();
+    });
+  });
 });
 

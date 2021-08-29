@@ -50,13 +50,17 @@ export class MainComponent implements OnInit, OnDestroy {
       )
       .subscribe((form: INote) => {
         this.updateDateField();
-        this.store.updateNote(form);
+        this.store.updateNote(this.getForm(form));
       });
   }
 
   private updateDateField(): void {
     const currentDate = new Date();
     this.form.get('date')?.setValue(currentDate, { emitEvent: false });
+  }
+
+  private getForm(form: INote): INote {
+    return { ...form, title: form.title || 'Untitled' };
   }
 
   private getTitle(): null | string {

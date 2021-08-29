@@ -2,7 +2,7 @@ import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChi
 import { FormControl } from '@angular/forms';
 import { interval, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { ExportImportService } from './../../shared/services/export-import/export-import/export-import.service';
+import { ExportImportService, HTMLInputEvent } from './../../shared/services/export-import/export-import/export-import.service';
 import { INote, StoreService } from './../../core/services/store/store.service';
 
 @Component({
@@ -30,7 +30,7 @@ export class AsideComponent implements OnDestroy, OnInit {
 
   constructor(
     public store: StoreService,
-    private exportImportService: ExportImportService
+    public exportImportService: ExportImportService
   ) {}
 
   ngOnInit() {
