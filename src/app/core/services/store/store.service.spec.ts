@@ -28,45 +28,45 @@ describe('StoreService', () => {
     });
   })
 
-  describe('getLastNote', () => {
-    it('should return last note', () => {
-      service.setNote({ title: 'title1', description: 'description1', id: 1, date: new Date(), lastUpdate: '' });
-      service.setNote({ title: 'title2', description: 'description2', id: 2, date: new Date(), lastUpdate: '' });
+  // describe('getLastNote', () => {
+  //   it('should return last note', () => {
+  //     service.setNote({ title: 'title1', description: 'description1', id: 1, date: new Date(), lastUpdate: '' });
+  //     service.setNote({ title: 'title2', description: 'description2', id: 2, date: new Date(), lastUpdate: '' });
 
-      expect(service.getLastNote().id).toBe(2);
-    });
-  })
+  //     expect(service.getLastNote().id).toBe(2);
+  //   });
+  // })
 
-  describe('removeNote', () => {
-    it('should remove a note', () => {
-      const note: INote = { title: 'title1', description: 'description1', id: 1, date: new Date(), lastUpdate: '' };
+  // describe('removeNote', () => {
+  //   it('should remove a note', () => {
+  //     const note: INote = { title: 'title1', description: 'description1', id: 1, date: new Date(), lastUpdate: '' };
 
-      service.setNote(note);
-      service.removeNote(note);
+  //     service.setNote(note);
+  //     service.removeNote(note);
 
-      expect(service.getNote(note.id)).toBeUndefined();
-    });
-  })
+  //     expect(service.getNote(note.id)).toBeUndefined();
+  //   });
+  // })
 
-  describe('updateNote', () => {
-    it('should update a note', () => {
-      const note: INote = { title: 'title1', description: 'description1', id: 1, date: new Date(), lastUpdate: '' };
-      const newNote: INote = { title: 'title2', description: 'description2', id: 1, date: new Date(), lastUpdate: '' };
+  // describe('updateNote', () => {
+  //   it('should update a note', () => {
+  //     const note: INote = { title: 'title1', description: 'description1', id: 1, date: new Date(), lastUpdate: '' };
+  //     const newNote: INote = { title: 'title2', description: 'description2', id: 1, date: new Date(), lastUpdate: '' };
 
-      service.setNote(note);
-      service.updateNote(newNote);
+  //     service.setNote(note);
+  //     service.updateNote(newNote);
 
-      expect(service.getNote(1)?.title).toBe('title2');
-    });
+  //     expect(service.getNote(1)?.title).toBe('title2');
+  //   });
 
-    it('should not update a note', () => {
-      const note: INote = { title: 'title1', description: 'description1', id: 1, date: new Date(), lastUpdate: '' };
-      const newNote: INote = { title: 'title2', description: 'description2', id: 2, date: new Date(), lastUpdate: '' };
+  //   it('should not update a note', () => {
+  //     const note: INote = { title: 'title1', description: 'description1', id: 1, date: new Date(), lastUpdate: '' };
+  //     const newNote: INote = { title: 'title2', description: 'description2', id: 2, date: new Date(), lastUpdate: '' };
 
-      service.setNote(note);
-      service.updateNote(newNote);
+  //     service.setNote(note);
+  //     service.updateNote(newNote);
 
-      expect(service.getNote(1)?.title).toBe('title1');
-    });
-  })
+  //     expect(service.getNote(1)?.title).toBe('title1');
+  //   });
+  // })
 });

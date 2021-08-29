@@ -14,6 +14,7 @@ export interface INote {
 })
 export class StoreService {
   public notes: INote[] = [];
+  private encryptString: string;
 
   constructor() {
     this.getSessionNotes().forEach(note => this.notes.push(note))
@@ -25,7 +26,7 @@ export class StoreService {
 
   getSessionNotes(): INote[] {
     if (this.sessionNotes) {
-      return JSON.parse(this.sessionNotes) as INote[];
+      return JSON.parse(AES.decrypt(this.encryptString, 'notes').toString(enc.Utf8)) as INote[];
     }
 
     return [];
@@ -45,8 +46,7 @@ export class StoreService {
   }
 
   setNote(note: INote): void {
-    const createdNote = this.createNewNote(note);
-    this.notes.push(createdNote);
+    this.notes.push(this.createNewNote(note));
 
     this.setNotesSession(this.notes);
   }
@@ -68,9 +68,12 @@ export class StoreService {
   }
 
   private setNotesSession(notes: INote[]): void {
+    const key = 'notes';
+    this.encryptString = AES.encrypt(JSON.stringify(notes), key).toString();
+
     sessionStorage.setItem(
-      'notes',
-      JSON.stringify(notes)
+      key,
+      this.encryptString
     );
   }
 
