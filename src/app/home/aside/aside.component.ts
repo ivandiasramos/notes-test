@@ -20,6 +20,7 @@ export class AsideComponent implements OnDestroy, OnInit {
   removedNote = new EventEmitter<INote>();
 
   searchControl = new FormControl();
+  isSorted: boolean;
 
   private destroy = new Subject();
 
@@ -43,6 +44,20 @@ export class AsideComponent implements OnDestroy, OnInit {
           this.store.updateNote(newNote);
         });
       });
+  }
+
+  sortByUpdate(): void {
+    this.store.notes = this.store.notes.sort((a, b) => {
+      if (new Date(a.date).getTime() < new Date(b.date).getTime()) {
+        return this.isSorted ? 1 : -1;
+      }
+      if (new Date(a.date).getTime() > new Date(b.date).getTime()) {
+        return this.isSorted ? -1 : 1 ;
+      }
+      return 0;
+    });
+
+    this.isSorted = !this.isSorted;
   }
 
   createNote(): void {

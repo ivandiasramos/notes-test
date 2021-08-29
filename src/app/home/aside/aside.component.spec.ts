@@ -96,5 +96,29 @@ describe('AsideComponent', () => {
       expect(spy).toHaveBeenCalled();
     });
   });
+
+  describe('sortByUpdate', () => {
+    beforeEach(() => {
+      const note1: INote = { title: 'title1', description: 'description1', id: 1, date: new Date('2021-08-29T18:47:57.883Z'), lastUpdate: '' };
+      const note2: INote = { title: 'title2', description: 'description2', id: 2, date: new Date('2021-08-28T18:47:57.883Z'), lastUpdate: '' };
+      const note3: INote = { title: 'title3', description: 'description3', id: 3, date: new Date('2021-08-28T18:47:57.883Z'), lastUpdate: '' };
+
+      component.store.notes = [note1, note2, note3];
+      component.store.setNote(note2);
+    });
+
+    it('should set isSorted as true', () => {
+      component.sortByUpdate();
+
+      expect(component.isSorted).toBeTruthy();
+    });
+
+    it('should set isSorted as false', () => {
+      component.sortByUpdate();
+      component.sortByUpdate();
+
+      expect(component.isSorted).toBeFalsy();
+    });
+  });
 });
 

@@ -16,13 +16,20 @@
             [formControl]="searchControl">
         <em class="fas fa-search"></em>
     </div>
-
-    <ul class="unstyled-list operations">
-        <li class="operator">
-            
-        </li>
-    </ul>
 </header>
+
+<ul class="unstyled-list operations">
+    <li class="operator">
+        <span class="description">
+            Sort by the note most recent edit
+        </span>
+        <button
+            (click)="sortByUpdate()"
+            class="unstyled-button">
+            <i class="fas fa-sort"></i>
+        </button>
+    </li>
+</ul>
 
 <ul class="unstyled-list list">
     <li *ngFor="let note of store.notes | filterNote : searchControl.value" class="item">
