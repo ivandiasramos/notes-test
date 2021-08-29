@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SHA1, AES, enc } from 'crypto-js';
+import { EncryptionService } from '../encryption/encryption.service';
 
 export interface INote {
   title: string,
@@ -16,7 +16,9 @@ export class StoreService {
   public notes: INote[] = [];
   private encryptString: string;
 
-  constructor() {
+  constructor(
+    private encryptionService: EncryptionService
+  ) {
     this.getSessionNotes().forEach(note => this.notes.push(note))
   }
 
@@ -26,7 +28,7 @@ export class StoreService {
 
   getSessionNotes(): INote[] {
     if (this.sessionNotes) {
-      return JSON.parse(AES.decrypt(this.encryptString, 'notes').toString(enc.Utf8)) as INote[];
+      return JSON.parse(this.encryptionService.decrypt(this.encryptString, 'notes')) as INote[];
     }
 
     return [];
@@ -69,7 +71,7 @@ export class StoreService {
 
   private setNotesSession(notes: INote[]): void {
     const key = 'notes';
-    this.encryptString = AES.encrypt(JSON.stringify(notes), key).toString();
+    this.encryptString = this.encryptionService.encrypt(JSON.stringify(notes), key);
 
     sessionStorage.setItem(
       key,

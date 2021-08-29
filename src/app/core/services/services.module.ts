@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { StoreService } from './store/store.service';
+import { EncryptionService } from './encryption/encryption.service';
 
 @NgModule({
-  providers: [StoreService]
+  providers: [StoreService, EncryptionService]
 })
 export class ServicesModule { }
