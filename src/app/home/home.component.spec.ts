@@ -1,3 +1,4 @@
+import { ExportImportService } from './../shared/services/export-import/export-import/export-import.service';
 import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -26,7 +27,7 @@ describe('HomeComponent', () => {
         CommonModule,
         FormsModule,
       ],
-      providers: [MockProvider(StoreService)]
+      providers: [MockProvider(StoreService), MockProvider(ExportImportService)]
     })
     .compileComponents();
   });

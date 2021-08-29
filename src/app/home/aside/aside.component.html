@@ -1,7 +1,7 @@
 <header class="header">
     <button
         type="button"
-        class="create-note-button"
+        class="create-note-button primary-button"
         (click)="createNote()">
         Create note
 
@@ -18,8 +18,23 @@
     </div>
 </header>
 
-<ul class="unstyled-list operations">
-    <li class="operator">
+<div class="actions-container">
+    <div>
+        <button
+            (click)="activeImportInput()"
+            class="primary-button small">
+            Import
+        </button>
+        <input #importInput accept=".json" class="d-none" type="file" (change)="importNotes($event)">
+
+        <button
+            [disabled]="!store.notes?.length"
+            (click)="exportNotes()"
+            class="primary-button small">
+            Export
+        </button>
+    </div>
+    <div>
         <span class="description">
             Sort by the note most recent edit
         </span>
@@ -28,8 +43,8 @@
             class="unstyled-button">
             <i class="fas fa-sort"></i>
         </button>
-    </li>
-</ul>
+    </div>
+</div>
 
 <ul class="unstyled-list list">
     <li *ngFor="let note of store.notes | filterNote : searchControl.value" class="item">

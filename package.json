@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "jest",
+    "test": "jest --detectOpenHandles",
     "test-coverage-watch": "jest --coverage --watch --detectOpenHandles",
     "test:coverage": "jest --coverage --detectOpenHandles",
     "test:watch": "jest --watch --detectOpenHandles",

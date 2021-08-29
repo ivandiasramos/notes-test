@@ -1,7 +1,8 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { interval, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { ExportImportService } from './../../shared/services/export-import/export-import/export-import.service';
 import { INote, StoreService } from './../../core/services/store/store.service';
 
 @Component({
@@ -19,12 +20,18 @@ export class AsideComponent implements OnDestroy, OnInit {
   @Output()
   removedNote = new EventEmitter<INote>();
 
+  @ViewChild('importInput')
+  importInput: ElementRef;
+
   searchControl = new FormControl();
   isSorted: boolean;
 
   private destroy = new Subject();
 
-  constructor(public store: StoreService) {}
+  constructor(
+    public store: StoreService,
+    private exportImportService: ExportImportService
+  ) {}
 
   ngOnInit() {
     this.updateNotes();
@@ -70,6 +77,19 @@ export class AsideComponent implements OnDestroy, OnInit {
 
   removeNote(note: INote): void {
     this.removedNote.emit(note);
+  }
+
+  activeImportInput(): void {
+    this.importInput.nativeElement.click();
+  }
+
+  importNotes($event: any): void {
+    this.exportImportService.importNotes($event);
+    this.importInput.nativeElement.value = '';
+  }
+
+  exportNotes(): void {
+    this.exportImportService.exportNotes();
   }
 
   getLastUpdate(note: INote): string {

@@ -7,6 +7,7 @@ import { MainComponent } from './main/main.component';
 import { HomeRoutingModule } from './home-routing.module';
 import { CoreModule } from '../core/core.module';
 import { FilterNoteModule } from './../shared/filters/filter-note/filter-note.module';
+import { ExportImportModule } from '../shared/services/export-import/export-import/export-import.module';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { FilterNoteModule } from './../shared/filters/filter-note/filter-note.mo
   ],
   imports: [
     ReactiveFormsModule,
+    ExportImportModule,
     HomeRoutingModule,
     FilterNoteModule,
     CommonModule,

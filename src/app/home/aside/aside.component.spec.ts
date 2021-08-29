@@ -1,3 +1,4 @@
+import { ExportImportService } from './../../shared/services/export-import/export-import/export-import.service';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MockProvider } from 'ng-mocks';
@@ -22,7 +23,7 @@ describe('AsideComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ReactiveFormsModule, FormsModule, FilterNoteModule],
       declarations: [ AsideComponent ],
-      providers: [MockProvider(StoreService)]
+      providers: [MockProvider(StoreService), MockProvider(ExportImportService)]
     })
     .compileComponents();
   });
@@ -118,6 +119,16 @@ describe('AsideComponent', () => {
       component.sortByUpdate();
 
       expect(component.isSorted).toBeFalsy();
+    });
+  });
+
+  describe('activeImportInput', () => {
+    it('should click on input file', () => {
+      const spy = jest.spyOn(component.importInput.nativeElement, 'click');
+      
+      component.activeImportInput();
+
+      expect(spy).toHaveBeenCalled();
     });
   });
 });
