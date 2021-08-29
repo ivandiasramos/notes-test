@@ -30,8 +30,8 @@ describe('StoreService', () => {
 
   describe('getLastNote', () => {
     it('should return last note', () => {
-      service.setNote({ title: 'title1', description: 'description1', date: new Date(), lastUpdate: '' });
-      service.setNote({ title: 'title2', description: 'description2', date: new Date(), lastUpdate: '' });
+      service.setNote({ title: 'title1', description: 'description1', id: 1, date: new Date(), lastUpdate: '' });
+      service.setNote({ title: 'title2', description: 'description2', id: 2, date: new Date(), lastUpdate: '' });
 
       expect(service.getLastNote().id).toBe(2);
     });
@@ -50,7 +50,7 @@ describe('StoreService', () => {
 
   describe('updateNote', () => {
     it('should update a note', () => {
-      const note: INote = { title: 'title1', description: 'description1', date: new Date(), lastUpdate: '' };
+      const note: INote = { title: 'title1', description: 'description1', id: 1, date: new Date(), lastUpdate: '' };
       const newNote: INote = { title: 'title2', description: 'description2', id: 1, date: new Date(), lastUpdate: '' };
 
       service.setNote(note);
@@ -60,7 +60,7 @@ describe('StoreService', () => {
     });
 
     it('should not update a note', () => {
-      const note: INote = { title: 'title1', description: 'description1', date: new Date(), lastUpdate: '' };
+      const note: INote = { title: 'title1', description: 'description1', id: 1, date: new Date(), lastUpdate: '' };
       const newNote: INote = { title: 'title2', description: 'description2', id: 2, date: new Date(), lastUpdate: '' };
 
       service.setNote(note);

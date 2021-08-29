@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { SHA1, AES, enc } from 'crypto-js';
 
 export interface INote {
   title: string,
@@ -44,21 +45,16 @@ export class StoreService {
   }
 
   setNote(note: INote): void {
-    this.notes.push(this.createNewNote(note));
+    const createdNote = this.createNewNote(note);
+    this.notes.push(createdNote);
 
-    sessionStorage.setItem(
-      'notes',
-      JSON.stringify(this.notes)
-    );
+    this.setNotesSession(this.notes);
   }
 
   removeNote(noteParam: INote): void {
-    this.notes = this.notes.filter(note => note.id !== noteParam.id)
+    this.notes = this.notes.filter(note => note.id !== (noteParam && noteParam.id))
 
-    sessionStorage.setItem(
-      'notes',
-      JSON.stringify(this.notes)
-    );
+    this.setNotesSession(this.notes);
   }
 
   updateNote(noteParam: INote): void {
@@ -68,9 +64,13 @@ export class StoreService {
         : note
     );
 
+    this.setNotesSession(this.notes);
+  }
+
+  private setNotesSession(notes: INote[]): void {
     sessionStorage.setItem(
       'notes',
-      JSON.stringify(this.notes)
+      JSON.stringify(notes)
     );
   }
 
@@ -79,6 +79,6 @@ export class StoreService {
   }
 
   private createNewNote(note: INote): INote {
-    return { ...note, id: Date.now() };
+    return { ...note, id: note.id ? note.id : Date.now() };
   }
 }
