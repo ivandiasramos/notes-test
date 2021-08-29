@@ -1,22 +1,29 @@
 import { Injectable } from '@angular/core';
 import { INote, StoreService } from './../../../../core/services/store/store.service';
 
+export interface HTMLInputEvent extends Event {
+  target: HTMLInputElement;
+}
+
 @Injectable()
 export class ExportImportService {
 
   constructor(private store: StoreService) {}
 
-  importNotes($event: any): void {
+  importNotes($event: HTMLInputEvent): void {
     const reader = new FileReader();
-    reader.readAsText($event.target.files[0], "UTF-8")
-    reader.onload = (event: ProgressEvent<FileReader>) => {
-      this.actionsAfterImport(event);
-    };
+
+    if ($event.target.files) {
+      reader.readAsText($event.target.files[0], "UTF-8")
+      reader.onload = (event: ProgressEvent<FileReader>) => {
+        this.actionsAfterImport(event);
+      };
+    }
   }
 
   exportNotes(): void {
     const dataStr = JSON.stringify(this.store.notes);
-    const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+    const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
     const exportFileDefaultName = 'notes.json';
 
     let linkElement = document.createElement('a');
